@@ -3,11 +3,11 @@ package br.com.mvabiguzzi.testesAutomatizados.leilao;
 public class TesteDoAvaliador {
 	
 	public static void main(String[] args) {
-		//Cenario 1: 3 lances nao ordenados
 		Usuario joao = new Usuario("Joao");
 		Usuario jose = new Usuario("Jose");
 		Usuario maria = new Usuario("Maria");
 		
+		//Cenario 1: 3 lances nao ordenados
 		Leilao leilao = new Leilao("Playstation 3 novo");
 		
 		leilao.propoe(new Lance(joao, 300.0));
