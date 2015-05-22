@@ -4,24 +4,32 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class AvaliadorTest {
 	
+	private Avaliador leiloeiro;
+	private Usuario joao;
+	private Usuario jose;
+	private Usuario maria;
+	
+	@Before
+	public void setup() {
+		this.leiloeiro = new Avaliador();
+		this.joao = new Usuario("Joao");
+		this.jose = new Usuario("Jose");
+		this.maria = new Usuario("Maria");
+	}
+	
 	@Test
 	public void deveEntenderLancesEmOrdemCrescente() {
-		Usuario joao = new Usuario("Joao");
-		Usuario jose = new Usuario("Jose");
-		Usuario maria = new Usuario("Maria");
-		
-		//Cenario: 3 lances em ordem crescente
 		Leilao leilao = new Leilao("Playstation 3 novo");
 		
 		leilao.propoe(new Lance(maria, 250.0));
 		leilao.propoe(new Lance(joao, 300.0));
 		leilao.propoe(new Lance(jose, 400.0));
 		
-		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
 		double maiorEsperado = 400.0;
@@ -33,13 +41,10 @@ public class AvaliadorTest {
 	
 	@Test
 	public void deveEntenderLeilaoComApenasUmLance() {
-		Usuario joao = new Usuario("Joao");
-		
 		Leilao leilao = new Leilao("Playstation 3 Novo");
 		
 		leilao.propoe(new Lance(joao,1000.0));
 		
-		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
 		assertEquals(1000, leiloeiro.getMaiorDeTodos(), 0.0001);
@@ -48,9 +53,6 @@ public class AvaliadorTest {
 	
 	@Test
 	public void deveEncontrarOsTresMaiores() {
-		Usuario joao = new Usuario("joao");
-		Usuario maria = new Usuario("maria");
-		
 		Leilao leilao = new Leilao("Playstation 3 Novo");
 		
 		leilao.propoe(new Lance(joao, 100.0));
@@ -58,7 +60,6 @@ public class AvaliadorTest {
 		leilao.propoe(new Lance(joao, 300.0));
 		leilao.propoe(new Lance(maria, 400.0));
 		
-		Avaliador leiloeiro = new Avaliador();
 		leiloeiro.avalia(leilao);
 		
 		List<Lance> maiores = leiloeiro.getTresMaiores();
