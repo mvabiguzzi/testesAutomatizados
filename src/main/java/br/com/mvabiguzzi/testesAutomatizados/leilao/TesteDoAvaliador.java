@@ -30,8 +30,12 @@ public class TesteDoAvaliador {
 		Avaliador leiloeiro1 = new Avaliador();
 		leiloeiro1.avalia(leilao1);
 		
-		System.out.println(leiloeiro1.getMaiorDeTodos());
-		System.out.println(leiloeiro1.getMenorDeTodos());
+		double maiorEsperado = 400.0;
+		double menorEsperado = 250.0;
+		
+		System.out.println("Cenario 2: 3 lances em ordem crescente");
+		System.out.println(maiorEsperado == leiloeiro1.getMaiorDeTodos());
+		System.out.println(menorEsperado == leiloeiro1.getMenorDeTodos());
 	}
 	
 }
