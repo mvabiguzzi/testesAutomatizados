@@ -1,6 +1,7 @@
 package br.com.mvabiguzzi.testesAutomatizados.leilao;
 
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 import java.util.List;
 
@@ -38,8 +39,8 @@ public class AvaliadorTest {
 		double maiorEsperado = 400.0;
 		double menorEsperado = 250.0;
 		
-		assertEquals(maiorEsperado, leiloeiro.getMaiorDeTodos(), 0.0001);
-		assertEquals(menorEsperado, leiloeiro.getMenorDeTodos(), 0.0001);
+		assertThat(leiloeiro.getMaiorDeTodos(), equalTo(maiorEsperado));
+		assertThat(leiloeiro.getMenorDeTodos(), equalTo(menorEsperado));
 	}
 	
 	@Test
@@ -51,8 +52,8 @@ public class AvaliadorTest {
 		
 		leiloeiro.avalia(leilao);
 		
-		assertEquals(1000, leiloeiro.getMaiorDeTodos(), 0.0001);
-		assertEquals(1000, leiloeiro.getMenorDeTodos(), 0.0001);
+		assertThat(leiloeiro.getMaiorDeTodos(), equalTo(1000.0));
+		assertThat(leiloeiro.getMenorDeTodos(), equalTo(1000.0));
 	}
 	
 	@Test
@@ -69,11 +70,11 @@ public class AvaliadorTest {
 		
 		List<Lance> maiores = leiloeiro.getTresMaiores();
 		
-		assertEquals(3, maiores.size());
-		
-		assertEquals(400.0, maiores.get(0).getValor(), 0.0001);
-		assertEquals(300.0, maiores.get(1).getValor(), 0.0001);
-		assertEquals(200.0, maiores.get(2).getValor(), 0.0001);
+		assertThat(maiores, hasItems(
+					new Lance(maria, 200.0),
+					new Lance(joao, 300.0),
+					new Lance(maria, 400.0)
+				));
 	}
 	
 	@Test(expected=RuntimeException.class)
